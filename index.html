@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RAM Engenharia - Construções, reformas, da base ao acabamento.">
+  <title>RAM Engenharia</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="logo.png" alt="Logo RAM Engenharia" class="logo">
+      <nav>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Carrossel  https://images.unsplash.com/photo-1581090700227-4c4f50a30a09?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy  -->
+  <section class="carousel">
+    <div class="slides">
+      <div class="slide active" >
+        <img src="logo.png" alt="logo">
+        <div class="caption">
+          <!--<h1>RAM Engenharia</h1>
+          <p>Construções e reformas da base ao acabamento</p>-->
+        </div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy');">
+        <div class="caption">
+          <h1>Projetos Sustentáveis</h1>
+          <p>Unindo qualidade e responsabilidade ambiental</p>
+        </div>
+      </div>
+      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy');">
+        <div class="caption">
+          <h1>Da Base ao Acabamento</h1>
+          <p>Excelência em cada etapa do projeto</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Setas laterais -->
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+
+    <!-- Pontos indicadores -->
+    <div class="indicators">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="sobre">
+    <div class="container">
+      <h2>Quem Somos</h2>
+      <p>A RAM Engenharia é especializada em construções e reformas sustentáveis, oferecendo soluções inovadoras da base ao acabamento. Unimos qualidade, tecnologia e responsabilidade ambiental em cada projeto.</p>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="servicos">
+    <div class="container">
+      <h2>Nossos Serviços</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Construções</h3>
+          <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
+        </div>
+        <div class="card">
+          <h3>Reformas</h3>
+          <p>Reformas residenciais e comerciais com planejamento eficiente e acabamentos de alto padrão.</p>
+        </div>
+        <div class="card">
+          <h3>Consultoria</h3>
+          <p>Orientação técnica para seu projeto, com soluções sustentáveis e econômicas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="contato">
+    <div class="container">
+      <h2>Fale Conosco</h2>
+      <form action="envia.php" method="post">
+        <input type="text" name="nome" placeholder="Seu Nome" required>
+        <input type="email" name="email" placeholder="Seu Email" required>
+        <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+      
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 RAM Engenharia - Todos os direitos reservados.</p>
+      <div class="social">
+        <a href="https://instagram.com/ram_engenharia" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/seuusuario" target="_blank"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="https://wa.me/5599999999999" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function nextSlide() {
+      let next = (current + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      let prev = (current - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        showSlide(Number(dot.dataset.slide));
+      });
+    });
+
+    document.querySelector('.next').addEventListener('click', nextSlide);
+    document.querySelector('.prev').addEventListener('click', prevSlide);
+
+    setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>
