@@ -57,6 +57,11 @@
     overflow: hidden;
   }
   
+  .logoslide {
+    padding: auto;
+    text-align: center;
+  }
+
   .slides {
     position: relative;
     height: 100%;
@@ -82,8 +87,16 @@
     z-index: 1;
   }
   
+  
+  .caption-l {
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
   .caption {
-    /*background: rgba(0, 0, 0, 0.5);*/
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 30px;
     text-align: center;
