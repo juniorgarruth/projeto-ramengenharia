@@ -154,5 +154,29 @@
 
     setInterval(nextSlide, 5000);
   </script>
+
+  <!-- Banner LGPD -->
+<div id="lgpd-banner" class="lgpd-banner">
+  <p>Utilizamos cookies e coletamos dados pessoais apenas para melhorar sua experiência. Ao continuar navegando, você concorda com nossa 
+    <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a>.
+  </p>
+  <button id="lgpd-aceitar">Aceitar</button>
+</div>
+
+<script>
+  // Script simples para armazenar consentimento no localStorage
+  const lgpdBanner = document.getElementById('lgpd-banner');
+  const aceitarBtn = document.getElementById('lgpd-aceitar');
+
+  if (!localStorage.getItem('lgpdAceito')) {
+    lgpdBanner.style.display = 'flex';
+  }
+
+  aceitarBtn.addEventListener('click', () => {
+    localStorage.setItem('lgpdAceito', 'true');
+    lgpdBanner.style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
