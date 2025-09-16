@@ -70,7 +70,7 @@
   </section>
 
   <!-- Serviços -->
-  <section id="servicos" class="servicos">
+  <!--<section id="servicos" class="servicos">
     <div class="container">
       <h2>Nossos Serviços</h2>
       <div class="cards">
@@ -88,7 +88,31 @@
         </div>
       </div>
     </div>
+  </section> -->
+
+  <section id="servicos" class="servicos">
+    <div class="container">
+      <h2>Nossos Serviços</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="imagens/construcoes.jpg" alt="Construções RAM Engenharia">
+          <h3>Construções</h3>
+          <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
+        </div>
+        <div class="card">
+          <img src="imagens/reformas.jpg" alt="Reformas RAM Engenharia">
+          <h3>Reformas</h3>
+          <p>Reformas residenciais e comerciais com planejamento eficiente e acabamentos de alto padrão.</p>
+        </div>
+        <div class="card">
+          <img src="imagens/consultoria.jpg" alt="Consultoria RAM Engenharia">
+          <h3>Consultoria</h3>
+          <p>Orientação técnica para seu projeto, com soluções sustentáveis e econômicas.</p>
+        </div>
+      </div>
+    </div>
   </section>
+  
 
   <!-- Contato -->
   <section id="contato" class="contato">
@@ -177,6 +201,77 @@
     lgpdBanner.style.display = 'none';
   });
 </script>
+
+<!-- Modal Lightbox com navegação -->
+<div id="lightbox" class="lightbox">
+  <span class="fechar">&times;</span>
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+  <img class="lightbox-conteudo" id="lightbox-img" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+  // Script Lightbox com carrossel
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const fechar = document.querySelector('.fechar');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  const imagens = Array.from(document.querySelectorAll('.servicos .card img'));
+  let indexAtual = 0;
+
+  function abrirLightbox(index) {
+    indexAtual = index;
+    lightbox.style.display = 'block';
+    lightboxImg.src = imagens[indexAtual].src;
+    lightboxCaption.innerHTML = imagens[indexAtual].alt;
+  }
+
+  imagens.forEach((img, i) => {
+    img.addEventListener('click', () => abrirLightbox(i));
+  });
+
+  function mostrarImagem(novoIndex) {
+    if (novoIndex < 0) novoIndex = imagens.length - 1;
+    if (novoIndex >= imagens.length) novoIndex = 0;
+    indexAtual = novoIndex;
+    lightboxImg.src = imagens[indexAtual].src;
+    lightboxCaption.innerHTML = imagens[indexAtual].alt;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    mostrarImagem(indexAtual - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    mostrarImagem(indexAtual + 1);
+  });
+
+  fechar.onclick = function() {
+    lightbox.style.display = 'none';
+  }
+
+  // fechar clicando fora da imagem
+  lightbox.onclick = function(e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  }
+
+  // navegação com teclado
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'block') {
+      if (e.key === 'ArrowLeft') mostrarImagem(indexAtual - 1);
+      if (e.key === 'ArrowRight') mostrarImagem(indexAtual + 1);
+      if (e.key === 'Escape') lightbox.style.display = 'none';
+    }
+  });
+</script>
+
+
 
 </body>
 </html>
