@@ -90,17 +90,17 @@
     </div>
   </section> -->
 
-  <section id="servicos" class="servicos">
+  <!-- <section id="servicos" class="servicos">
     <div class="container">
       <h2>Nossos Serviços</h2>
       <div class="cards">
         <div class="card">
-          <img src="imagens/construcoes.jpg" alt="Construções RAM Engenharia">
+          <img src="imagens/images.jpg" src="imagens/images2.jpg"  alt="Construções RAM Engenharia">
           <h3>Construções</h3>
           <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
         </div>
         <div class="card">
-          <img src="imagens/reformas.jpg" alt="Reformas RAM Engenharia">
+          <img src="imagens/images3.jpg" alt="Reformas RAM Engenharia">
           <h3>Reformas</h3>
           <p>Reformas residenciais e comerciais com planejamento eficiente e acabamentos de alto padrão.</p>
         </div>
@@ -111,7 +111,45 @@
         </div>
       </div>
     </div>
+  </section>  -->
+
+  <section id="servicos" class="servicos">
+    <div class="container">
+      <h2>Nossos Serviços</h2>
+      <div class="cards">
+        <!-- Construções -->
+        <div class="card">
+          <h3>Construções</h3>
+          <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
+          <img class="capa" src="imagens/images.jpg" alt="Construções" data-galeria="construcoes">
+        </div>
+  
+        <!-- Reformas -->
+        <div class="card">
+          <h3>Reformas</h3>
+          <p>Reformas residenciais e comerciais com planejamento eficiente e acabamentos de alto padrão.</p>
+          <img class="capa" src="imagens/reforma-capa.jpg" alt="Reformas" data-galeria="reformas">
+        </div>
+  
+        <!-- Consultoria -->
+        <div class="card">
+          <h3>Consultoria</h3>
+          <p>Orientação técnica para seu projeto, com soluções sustentáveis e econômicas.</p>
+          <img class="capa" src="imagens/consultoria-capa.jpg" alt="Consultoria" data-galeria="consultoria">
+        </div>
+      </div>
+    </div>
   </section>
+  
+  <!-- Modal Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="fechar">&times;</span>
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+    <img class="lightbox-conteudo" id="lightbox-img" alt="">
+    <div id="lightbox-caption"></div>
+  </div>
+  
   
 
   <!-- Contato -->
@@ -203,6 +241,15 @@
 </script>
 
 <!-- Modal Lightbox com navegação -->
+<!--  <div id="lightbox" class="lightbox">
+  <span class="fechar">&times;</span>
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+  <img class="lightbox-conteudo" id="lightbox-img" alt="">
+  <div id="lightbox-caption"></div>
+</div> -->
+
+<!-- Modal Lightbox com navegação -->
 <div id="lightbox" class="lightbox">
   <span class="fechar">&times;</span>
   <a class="prev">&#10094;</a>
@@ -211,7 +258,7 @@
   <div id="lightbox-caption"></div>
 </div>
 
-<script>
+<!-- <script>
   // Script Lightbox com carrossel
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
@@ -269,7 +316,74 @@
       if (e.key === 'Escape') lightbox.style.display = 'none';
     }
   });
+</script> -->
+
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const fechar = document.querySelector('.fechar');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  // Defina as imagens de cada serviço
+  const galerias = {
+    construcoes: [
+      {src: 'imagens/images.jpg', alt: 'Construção 1'},
+      {src: 'imagens/images2.jpg', alt: 'Construção 2'},
+      {src: 'imagens/images3.jpg', alt: 'Construção 3'}
+    ],
+    reformas: [
+      {src: 'imagens/reforma1.jpg', alt: 'Reforma 1'},
+      {src: 'imagens/reforma2.jpg', alt: 'Reforma 2'}
+    ],
+    consultoria: [
+      {src: 'imagens/consultoria1.jpg', alt: 'Consultoria 1'},
+      {src: 'imagens/consultoria2.jpg', alt: 'Consultoria 2'}
+    ]
+  };
+
+  let imagensAtuais = [];
+  let indexAtual = 0;
+
+  function abrirLightbox(galeria) {
+    imagensAtuais = galerias[galeria];
+    indexAtual = 0;
+    mostrarImagem(indexAtual);
+    lightbox.style.display = 'block';
+  }
+
+  function mostrarImagem(index) {
+    if (index < 0) index = imagensAtuais.length - 1;
+    if (index >= imagensAtuais.length) index = 0;
+    indexAtual = index;
+    lightboxImg.src = imagensAtuais[indexAtual].src;
+    lightboxCaption.innerHTML = imagensAtuais[indexAtual].alt;
+  }
+
+  // Clique na capa
+  document.querySelectorAll('.capa').forEach(img => {
+    img.addEventListener('click', () => {
+      const galeria = img.dataset.galeria;
+      abrirLightbox(galeria);
+    });
+  });
+
+  prevBtn.addEventListener('click', () => mostrarImagem(indexAtual - 1));
+  nextBtn.addEventListener('click', () => mostrarImagem(indexAtual + 1));
+  fechar.onclick = () => lightbox.style.display = 'none';
+  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; }
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'block') {
+      if (e.key === 'ArrowLeft') mostrarImagem(indexAtual - 1);
+      if (e.key === 'ArrowRight') mostrarImagem(indexAtual + 1);
+      if (e.key === 'Escape') lightbox.style.display = 'none';
+    }
+  });
 </script>
+
 
 
 

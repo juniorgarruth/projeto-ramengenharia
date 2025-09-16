@@ -238,6 +238,46 @@
     color: #f4b041;
     margin-bottom: 10px;
   }
+
+
+  .galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .galeria img {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .galeria img:hover {
+    transform: scale(1.05);
+  }  
+
+
+  .card .capa {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .card .capa:hover {
+    transform: scale(1.02);
+  }
+  
+  
+
+
+
   
   /* Contato */
   form {
