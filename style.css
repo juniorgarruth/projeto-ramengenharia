@@ -128,7 +128,7 @@
   }
   
   /* Setas laterais */
-.prev, .next {
+  .prev, .next {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -256,6 +256,7 @@
   .card p {
     font-size: 0.95rem;
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
   }
 
 
@@ -416,9 +417,6 @@
     background-color: rgba(0,0,0,0.6);
   }
 
-
-
-  
   /* Contato */
   form {
     max-width: 600px;
