@@ -363,6 +363,25 @@
     lightboxCaption.innerHTML = imagensAtuais[indexAtual].alt;
   }
 
+    // Clique no botão Ver Galeria
+    document.querySelectorAll('.btn-ver').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const galeria = btn.dataset.galeria;
+      abrirLightbox(galeria);
+    });
+  });
+
+ // Clique na imagem de capa também abre a galeria
+ document.querySelectorAll('.capa-container img').forEach(img => {
+    img.addEventListener('click', () => {
+      const galeria = img.dataset.galeria;
+      abrirLightbox(galeria);
+    });
+  });
+
+
+
+
   // Clique na capa
   document.querySelectorAll('.capa').forEach(img => {
     img.addEventListener('click', () => {
@@ -394,13 +413,7 @@
   });
 });*/
 
-// Clique na imagem de capa também abre a galeria
-document.querySelectorAll('.capa-container img').forEach(img => {
-  img.addEventListener('click', () => {
-    const galeria = img.dataset.galeria;
-    abrirLightbox(galeria);
-  });
-});
+
 
 </script>
 
