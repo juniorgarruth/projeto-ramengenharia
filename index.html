@@ -121,7 +121,8 @@
         <div class="card">
           <h3>Construções</h3>
           <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
-          <img class="capa" src="imagens/images.jpg" alt="Construções" data-galeria="construcoes">
+          <img class="capa" src="imagens/construcao1.jpg" alt="Construções" data-galeria="construcoes">
+          <!-- <button class="btn-ver" data-galeria="construcoes">Ver Galeria</button> -->
         </div>
   
         <!-- Reformas -->
@@ -330,9 +331,9 @@
   // Defina as imagens de cada serviço
   const galerias = {
     construcoes: [
-      {src: 'imagens/images.jpg', alt: 'Images 1'},
-      {src: 'imagens/images2.jpg', alt: 'Construção 2'},
-      {src: 'imagens/images3.jpg', alt: 'Construção 3'}
+      {src: 'imagens/construcao1.jpg', alt: 'Construção 1'},
+      {src: 'imagens/construcao2.jpg', alt: 'Construção 2'},
+      {src: 'imagens/construcao3.jpg', alt: 'Construção 3'}
     ],
     reformas: [
       {src: 'imagens/reforma1.jpg', alt: 'Reforma 1'},
@@ -370,6 +371,8 @@
     });
   });
 
+  
+
   prevBtn.addEventListener('click', () => mostrarImagem(indexAtual - 1));
   nextBtn.addEventListener('click', () => mostrarImagem(indexAtual + 1));
   fechar.onclick = () => lightbox.style.display = 'none';
@@ -382,6 +385,23 @@
       if (e.key === 'Escape') lightbox.style.display = 'none';
     }
   });
+
+  // Clique no botão Ver Galeria
+/*document.querySelectorAll('.btn-ver').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const galeria = btn.dataset.galeria;
+    abrirLightbox(galeria);
+  });
+});*/
+
+// Clique na imagem de capa também abre a galeria
+document.querySelectorAll('.capa-container img').forEach(img => {
+  img.addEventListener('click', () => {
+    const galeria = img.dataset.galeria;
+    abrirLightbox(galeria);
+  });
+});
+
 </script>
 
 
