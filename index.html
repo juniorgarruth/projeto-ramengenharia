@@ -121,35 +121,116 @@
         <div class="card">
           <h3>Construções</h3>
           <p>Projetos completos de obras civis com foco em sustentabilidade e qualidade.</p>
-          <img class="capa" src="imagens/construcao1.jpg" alt="Construções" data-galeria="construcoes">
-          <!-- <button class="btn-ver" data-galeria="construcoes">Ver Galeria</button> -->
+          <div class="capa-container">
+            <img src="imagens/construcao-capa.jpg" alt="Construções" data-galeria="construcoes">
+            <button class="btn-ver" data-galeria="construcoes">Ver Galeria</button>
+          </div>
         </div>
   
         <!-- Reformas -->
         <div class="card">
           <h3>Reformas</h3>
           <p>Reformas residenciais e comerciais com planejamento eficiente e acabamentos de alto padrão.</p>
-          <img class="capa" src="imagens/reforma-capa.jpg" alt="Reformas" data-galeria="reformas">
+          <div class="capa-container">
+            <img src="imagens/reforma-capa.jpg" alt="Reformas" data-galeria="reformas">
+            <button class="btn-ver" data-galeria="reformas">Ver Galeria</button>
+          </div>
         </div>
   
         <!-- Consultoria -->
         <div class="card">
           <h3>Consultoria</h3>
           <p>Orientação técnica para seu projeto, com soluções sustentáveis e econômicas.</p>
-          <img class="capa" src="imagens/consultoria-capa.jpg" alt="Consultoria" data-galeria="consultoria">
+          <div class="capa-container">
+            <img src="imagens/consultoria-capa.jpg" alt="Consultoria" data-galeria="consultoria">
+            <button class="btn-ver" data-galeria="consultoria">Ver Galeria</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
   
   <!-- Modal Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="fechar">&times;</span>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
-    <img class="lightbox-conteudo" id="lightbox-img" alt="">
-    <div id="lightbox-caption"></div>
-  </div>
+<div id="lightbox" class="lightbox">
+  <span class="fechar">&times;</span>
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+  <img class="lightbox-conteudo" id="lightbox-img" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const fechar = document.querySelector('.fechar');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  // Defina as imagens de cada serviço (troque para suas fotos reais)
+  const galerias = {
+    construcoes: [
+      {src: 'imagens/construcao1.jpg', alt: 'Construção 1'},
+      {src: 'imagens/construcao2.jpg', alt: 'Construção 2'},
+      {src: 'imagens/construcao3.jpg', alt: 'Construção 3'}
+    ],
+    reformas: [
+      {src: 'imagens/reforma1.jpg', alt: 'Reforma 1'},
+      {src: 'imagens/reforma2.jpg', alt: 'Reforma 2'}
+    ],
+    consultoria: [
+      {src: 'imagens/consultoria1.jpg', alt: 'Consultoria 1'},
+      {src: 'imagens/consultoria2.jpg', alt: 'Consultoria 2'}
+    ]
+  };
+
+  let imagensAtuais = [];
+  let indexAtual = 0;
+
+  function abrirLightbox(galeria) {
+    imagensAtuais = galerias[galeria];
+    indexAtual = 0;
+    mostrarImagem(indexAtual);
+    lightbox.style.display = 'block';
+  }
+
+  function mostrarImagem(index) {
+    if (index < 0) index = imagensAtuais.length - 1;
+    if (index >= imagensAtuais.length) index = 0;
+    indexAtual = index;
+    lightboxImg.src = imagensAtuais[indexAtual].src;
+    lightboxCaption.innerHTML = imagensAtuais[indexAtual].alt;
+  }
+
+  // Clique no botão Ver Galeria
+  document.querySelectorAll('.btn-ver').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const galeria = btn.dataset.galeria;
+      abrirLightbox(galeria);
+    });
+  });
+
+  // Clique na imagem de capa também abre a galeria
+  document.querySelectorAll('.capa-container img').forEach(img => {
+    img.addEventListener('click', () => {
+      const galeria = img.dataset.galeria;
+      abrirLightbox(galeria);
+    });
+  });
+
+  prevBtn.addEventListener('click', () => mostrarImagem(indexAtual - 1));
+  nextBtn.addEventListener('click', () => mostrarImagem(indexAtual + 1));
+  fechar.onclick = () => lightbox.style.display = 'none';
+  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; }
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'block') {
+      if (e.key === 'ArrowLeft') mostrarImagem(indexAtual - 1);
+      if (e.key === 'ArrowRight') mostrarImagem(indexAtual + 1);
+      if (e.key === 'Escape') lightbox.style.display = 'none';
+    }
+  });
+</script>
   
   
 
@@ -320,102 +401,7 @@
 </script> -->
 
 
-<script>
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
-  const fechar = document.querySelector('.fechar');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
 
-  // Defina as imagens de cada serviço
-  const galerias = {
-    construcoes: [
-      {src: 'imagens/construcao1.jpg', alt: 'Construção 1'},
-      {src: 'imagens/construcao2.jpg', alt: 'Construção 2'},
-      {src: 'imagens/construcao3.jpg', alt: 'Construção 3'}
-    ],
-    reformas: [
-      {src: 'imagens/reforma1.jpg', alt: 'Reforma 1'},
-      {src: 'imagens/reforma2.jpg', alt: 'Reforma 2'}
-    ],
-    consultoria: [
-      {src: 'imagens/consultoria1.jpg', alt: 'Consultoria 1'},
-      {src: 'imagens/consultoria2.jpg', alt: 'Consultoria 2'}
-    ]
-  };
-
-  let imagensAtuais = [];
-  let indexAtual = 0;
-
-  function abrirLightbox(galeria) {
-    imagensAtuais = galerias[galeria];
-    indexAtual = 0;
-    mostrarImagem(indexAtual);
-    lightbox.style.display = 'block';
-  }
-
-  function mostrarImagem(index) {
-    if (index < 0) index = imagensAtuais.length - 1;
-    if (index >= imagensAtuais.length) index = 0;
-    indexAtual = index;
-    lightboxImg.src = imagensAtuais[indexAtual].src;
-    lightboxCaption.innerHTML = imagensAtuais[indexAtual].alt;
-  }
-
-    // Clique no botão Ver Galeria
-    document.querySelectorAll('.btn-ver').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const galeria = btn.dataset.galeria;
-      abrirLightbox(galeria);
-    });
-  });
-
- // Clique na imagem de capa também abre a galeria
- document.querySelectorAll('.capa-container img').forEach(img => {
-    img.addEventListener('click', () => {
-      const galeria = img.dataset.galeria;
-      abrirLightbox(galeria);
-    });
-  });
-
-
-
-
-  // Clique na capa
-  document.querySelectorAll('.capa').forEach(img => {
-    img.addEventListener('click', () => {
-      const galeria = img.dataset.galeria;
-      abrirLightbox(galeria);
-    });
-  });
-
-  
-
-  prevBtn.addEventListener('click', () => mostrarImagem(indexAtual - 1));
-  nextBtn.addEventListener('click', () => mostrarImagem(indexAtual + 1));
-  fechar.onclick = () => lightbox.style.display = 'none';
-  lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; }
-
-  document.addEventListener('keydown', (e) => {
-    if (lightbox.style.display === 'block') {
-      if (e.key === 'ArrowLeft') mostrarImagem(indexAtual - 1);
-      if (e.key === 'ArrowRight') mostrarImagem(indexAtual + 1);
-      if (e.key === 'Escape') lightbox.style.display = 'none';
-    }
-  });
-
-  // Clique no botão Ver Galeria
-/*document.querySelectorAll('.btn-ver').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const galeria = btn.dataset.galeria;
-    abrirLightbox(galeria);
-  });
-});*/
-
-
-
-</script>
 
 
 
